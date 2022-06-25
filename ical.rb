@@ -28,10 +28,7 @@ def merged_feed
     cal.to_ical
 end
 
-def read_ics_file(filename)
+def get_events_from_file(filename)
     g = open(filename,'rb')
-    gcal = Icalendar::Calendar.from_ical(g.read())
-    for component in gcal.walk():
-        print component.name
-    g.close()
+    get_events(g)
 end
