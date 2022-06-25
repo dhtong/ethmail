@@ -34,3 +34,11 @@ def get_blobs
     num_events = rng.rand(ICS_BLOBS.size - 1) + 1
     ICS_BLOBS.sample(num_events, random: rng)
 end
+
+def read_ics_file(filename)
+    g = open(filename,'rb')
+    gcal = Icalendar::Calendar.from_ical(g.read())
+    for component in gcal.walk():
+        print component.name
+    g.close()
+end

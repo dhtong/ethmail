@@ -8,6 +8,9 @@ end
 
 post '/ingestion' do
     puts params
+    if params['attachment-1']['type'] == 'text/calendar'
+        read_ics_file(params['attachment-1']['tempfile'])
+    end
 end
 
 get '/feed/:boop' do
