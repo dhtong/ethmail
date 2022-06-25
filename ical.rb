@@ -29,6 +29,7 @@ def merged_feed
 end
 
 def get_events_from_file(filename)
-    g = open(filename,'rb')
-    get_events(g)
+    cal_file = open(filename,'rb')
+    cals = Icalendar::Calendar.parse(cal_file)
+    puts cals.first.events.first
 end
