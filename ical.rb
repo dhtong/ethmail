@@ -23,7 +23,14 @@ def from_ics_base64(blob_base64)
 end
 
 def merged_feed
-    cal = merge_events(ICS_BLOBS.map {|blob| get_events(blob)}.flatten)
+    cal = merge_events(get_blobs.map {|blob| get_events(blob)}.flatten)
     cal.publish # ??
     cal.to_ical
+end
+
+# select blobs randomly, changing every 15 seconds
+def get_blobs
+    rng = Random.new(Time.now.to_i / 15)
+    num_events = rng.rand(ICS_BLOBS.size - 1) + 1
+    ICS_BLOBS.sample(num_events, random: rng)
 end
