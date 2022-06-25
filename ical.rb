@@ -27,3 +27,11 @@ def merged_feed
     cal.publish # ??
     cal.to_ical
 end
+
+def read_ics_file(filename)
+    g = open(filename,'rb')
+    gcal = Icalendar::Calendar.from_ical(g.read())
+    for component in gcal.walk():
+        print component.name
+    g.close()
+end
